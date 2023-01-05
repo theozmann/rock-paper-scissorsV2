@@ -1,35 +1,62 @@
 function getComputerChoice() {
     let ranNum = Math.floor(Math.random() * 3) + 1;
-    let choice = '';
     if (ranNum === 1) {
-        choice = 'rock';
+        return 'rock';
     }
     else if (ranNum === 2) {
-        choice = 'paper';
+        return 'paper';
     }
     else if (ranNum === 3) {
-        choice = 'scissors';
+        return 'scissors';
     }
-    return choice;
 }
 
-function playerChoice() {
-    let playerChoice = prompt('Rock, Paper, or Scissors?').toLowerCase();
-    return playerChoice;
-}
 
 function playRound(playerSelection, computerSelection) {
+    let result = '';
+
     if (playerSelection === 'rock' && computerSelection === 'paper' || 
         playerSelection === 'paper' && computerSelection === 'scissors' || 
         playerSelection === 'scissors' && computerSelection === 'rock') {
-            console.log(`Sorry! ${computerSelection} beats ${playerSelection}, you lost!`);
-        }
+        return result = `Sorry! ${computerSelection} beats ${playerSelection}, you lost!`;
+    }
     else if (playerSelection === computerSelection) {
-        console.log(`You both chose ${playerSelection}! It's a tie!`);
+        return result = `You both chose ${playerSelection}! It's a tie!`;
     }
     else {
-        console.log(`Congrats! ${playerSelection} beats ${computerSelection}! You won!`);
+        return result = `Congrats! ${playerSelection} beats ${computerSelection}, You won!`;
     }
 }
 
-console.log(playRound(playerChoice(), getComputerChoice()));
+function game() {
+    let playerTotal = 0;
+    let computerTotal = 0;
+
+    for (let i = 0; i< 5; i++) {
+        let playerChoice = prompt('Rock, Paper, or Scissors?').toLowerCase();
+        let computerChoice = getComputerChoice();
+        let roundResult = playRound(playerChoice, computerChoice);
+        
+        if(roundResult.charAt(0) === 'S') {
+            computerTotal += 1;
+            console.log(roundResult);
+        }
+        else if(roundResult.charAt(0) === 'C') {
+            playerTotal += 1;
+            console.log(roundResult);
+        }
+        else {
+            console.log(roundResult);
+        }
+    }
+
+    if (playerTotal > computerTotal) {
+        console.log('you won the game!');
+    }
+    else {
+        console.log('you lost, fuckin loser');
+    }
+}
+
+game();
+
